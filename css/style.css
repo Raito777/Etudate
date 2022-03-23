@@ -3,7 +3,7 @@ nav{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 2vw;
     font-family: 'Roboto', sans-serif;
     padding:20px;
 }
@@ -21,7 +21,7 @@ a{
 .logoContent{
     margin:0 20px;
     font-family: 'Lobster', cursive;
-    font-size:4rem;
+    font-size:4vw;
 }
 .logoContent img{
     margin:0 10px;
@@ -37,14 +37,14 @@ a{
 }
 
 .right-side a{
-    margin:0 20px;
-    font-size: 1rem;
+    margin:0 2vw;
+    font-size: 2vw;
     text-decoration: underline;
 }
 
 .right-side .connexion{
     color:white;
-    padding:10px 25px;
+    display: inline-block;
     border-radius: 50px;
     background: rgb(14,0,255);
     background: linear-gradient(202deg, rgba(14,0,255,1) 0%, rgba(255,0,151,1) 100%);
@@ -53,5 +53,9 @@ a{
 -moz-box-shadow: 5px 5px 50px 10px rgba(255, 0, 98, 0.404);
 text-decoration: none;
 
+}
+
+.connexion{
+    padding: 1vw 3vh;
 }
 
