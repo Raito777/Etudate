@@ -28,7 +28,7 @@
 
 }
 
-input{
+.connexion-div input{
     font-size: 1.5rem;
     color:rgb(115, 114, 114);
     padding: 15px 30px 15px 60px;
@@ -64,6 +64,19 @@ form .submit{
     -moz-box-shadow: 5px 5px 50px 10px rgba(255, 0, 98, 0.404);
     color: white;
     padding:15px 30px;
+    outline:none;
+    border:none;
+    border-radius: 50px;
+    font-size:1.5rem;
+    cursor:pointer;
+    transition: 0.4s ease-in-out;
+}
+form .submit:hover{
+    background: linear-gradient(202deg, rgba(14,0,255,1) 0%, rgba(255,0,151,1) 100%);
+    background-size:175%;
+    box-shadow: 20px 10px 50px 10px rgba(255, 0, 98, 0.404);
+    -webkit-box-shadow: 20px 10px 50px 10px rgba(255, 0, 98, 0.404);
+    -moz-box-shadow: 20px 10px 50px 10px rgba(255, 0, 98, 0.404);
 }
 
 form a{

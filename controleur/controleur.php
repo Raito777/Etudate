@@ -6,7 +6,7 @@
 		//On envoit le titre de la page HTML à la vue
 		// Ici titre par défaut au cas où
 		if(!isset($datatab['title'])){
-			$title="Pas de titre";
+			$title="Etudate";
 		}
 
 		foreach ($datatab as $key=>$val)
@@ -24,11 +24,10 @@
 		//dynamique de la vue
 		$data['title']="Accueil - Etudate";
 
-        chargerPage("head.html",$data);
+        chargerPage("head.php",$data);
         chargerPage("nav.html");
 		chargerPage("accueil.html");
 		chargerPage("footer.html");
-		
 		
     }
 
@@ -39,14 +38,10 @@
 		//dynamique de la vue
 		$data['title']="Connexion - Etudate";
 
-        chargerPage("head.html",$data);
-
+        chargerPage("head.php",$data);
         chargerPage("nav.html");
-
         chargerPage("connexion.html");
-
         chargerPage("footer.html");
-		
 		
     }
     
@@ -56,14 +51,27 @@
 		//dynamique de la vue
 		$data['title']="Inscription - Etudate";
 		
-		chargerPage("head.html",$data);
+		chargerPage("head.php",$data);
 
         chargerPage("nav.html");
 
         chargerPage("inscription.html");
 
         chargerPage("footer.html");
+	}
 
+	function pageQuizz(){
+
+		$data['title']="Quizz - Etudate";
+		
+		chargerPage("head.php",$data);
+
+        chargerPage("nav.html");
+
+        chargerPage("quizz.php");
+
+        chargerPage("footer.html");
 
 	}
-	?>
+
+?>
