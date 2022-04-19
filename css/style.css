@@ -248,6 +248,14 @@ main{
     animation-fill-mode: forwards; 
 }
 
+footer{
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    color:rgb(122, 122, 122);
+    display:flex;
+    justify-content: center;
+}
+
 @media screen and (max-width: 1000px) {
     .left-side a{
         display:none;
