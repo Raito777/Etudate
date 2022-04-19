@@ -1,12 +1,13 @@
 
 <?php
 
-            $servername = 'sqletud.u-pem.fr';
-            $username = '';
+            $servername = 'localhost';
+            $username = 'root';
             $password = '';
-            $dbname = '';
-            
-  
+            $dbname = 'etudate';
+
+
+
             $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
 ?>

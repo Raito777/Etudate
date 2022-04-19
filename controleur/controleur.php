@@ -31,5 +31,22 @@
 		
 		
     }
+
+
+	function pageConnexion() {
+		
+		//fonction commune, unqiue, chargé de créer le contenu
+		//dynamique de la vue
+		$data['title']="Connexion - Etudate";
+
+        chargerPage("head.html",$data);
+        chargerPage("nav.html");
+
+        chargerPage("connexion.php");
+
+        chargerPage("footer.html");
+		
+		
+    }
     
     ?>
