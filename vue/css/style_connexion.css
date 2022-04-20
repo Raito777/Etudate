@@ -29,10 +29,10 @@
 }
 
 .connexion-div input{
-    font-size: 1.5rem;
+    font-size: 1rem;
     color:rgb(115, 114, 114);
     padding: 15px 30px 15px 60px;
-    border: none;
+    border: 2px solid white;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
@@ -40,12 +40,20 @@
     -o-border-radius: 50px;
     width: 30vw;
     margin: 10px;
+    transition: 0.2s;
 }
 
 input:focus{
     outline:none;
     border: 2px solid rgba(255,0,151,1);
 
+}
+input + svg{
+    fill: rgb(115, 114, 114);
+    transition:0.2s ease-in-out;
+}
+input:focus + svg{
+    fill : rgba(255,0,151,1)!important;
 }
 
 form{
@@ -83,8 +91,19 @@ form a{
     text-decoration: underline;
 }
 
+.input-div svg{
+    position:absolute;
+    left:25px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    width:30px;
+}
+
 .input-div img{
-    fill:gray;
     position:absolute;
     left:25px;
     top: 50%;
@@ -98,3 +117,31 @@ form a{
 .input-div{
     position: relative;
 }
+
+.gender-select{
+    display:flex;
+    justify-content: space-around;
+}
+
+
+  .radio-inscription{
+      width:90%;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .radio-inscription legend{
+      font-weight: 600;
+  }
+
+  .gender-select div{
+      display:flex;
+      align-items:center;
+  }
+
+  #message-erreur{
+    font-size: 1rem;
+    color: red;
+    font-weight: 500;
+  }

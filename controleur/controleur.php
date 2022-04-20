@@ -55,7 +55,7 @@
 
         chargerPage("nav.html");
 
-        chargerPage("inscription.html");
+        chargerPage("inscription.php");
 
         chargerPage("footer.html");
 	}
