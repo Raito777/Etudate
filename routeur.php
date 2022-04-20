@@ -26,6 +26,9 @@
 		case 'quizz' :
 				pageQuizz();
 				break;
+		case 'profile':
+				pageProfil();
+				break;
 		 default : 
 		 	http_response_code('500');
 			echo '404';
