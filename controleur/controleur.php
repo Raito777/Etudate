@@ -74,4 +74,18 @@
 
 	}
 
+	function pageProfil(){
+
+		$data['title']="Profil - Etudate";
+		
+		chargerPage("head.php",$data);
+
+        chargerPage("nav.html");
+
+        chargerPage("profil.html");
+
+        chargerPage("footer.html");
+
+	}
+
 ?>
