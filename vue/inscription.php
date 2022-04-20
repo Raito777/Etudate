@@ -1,6 +1,8 @@
 <?php
 
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     $bdd = getBdd();
 
@@ -35,7 +37,7 @@
                                     $insertmbr->execute(array($prenom, $mdp, $genre, $orientation, $mail));
                                     $erreur = _("Votre compte a bien été créé !");
                                     $_SESSION['IdUtilisateur'] = 0;
-                                    //header("Location: connexion.php");
+                                    header("Location: connexion");
 
                                     }else{
                                         $erreur = "L'attirance doit être Les hommes, Les femmes ou Autre";
@@ -84,7 +86,7 @@
         </div>
         <div class="radio-inscription">
 
-            <legend>Vous êtes...</legend>
+            <legend>Vous êtes</legend>
             <div class="gender-select">
                 <div>
                      <input type="radio" name="genre" id="male" value="homme" required <?php if(isset($genre) AND $genre == "male") { echo "checked"; } ?> >
@@ -101,7 +103,7 @@
                 </div>
             </div>
 
-            <legend>...attiré par</legend>
+            <legend>Attiré par</legend>
             <div class="gender-select">
                 <div>
                      <input type="radio" name="orientation" id="aMale" value="hommes" required <?php if(isset($orientation) AND $orientation == "hommes") { echo "checked"; } ?>>

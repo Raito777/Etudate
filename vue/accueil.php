@@ -1,7 +1,8 @@
-
-
-
-
+<?php
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+?>
 
     <header>
 
@@ -10,7 +11,17 @@
                 <h1>ETUDATE</h1>
                 <p>Le site de rencontre pour étudiants</p>
             </div>
-            <a href="inscription">Je m'inscris !</a>
+            <?php
+              if(empty(isset($_SESSION['IdUtilisateur'])) OR $_SESSION['IdUtilisateur'] == 0) {
+            ?>
+              <a href="inscription">Je m'inscris !</a>
+            <?php
+              } else if($_SESSION['IdUtilisateur'] != 0) {
+            ?>
+                <a href="accueil">Je match ♥</a>
+            <?php
+                }
+            ?>
         </div>
 
         <div class="right-header">
