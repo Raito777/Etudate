@@ -10,7 +10,6 @@
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
     width: 50vw;
-
 }
 .connexion-detail h3{
     font-size: 3rem;
@@ -22,7 +21,11 @@
     margin: 0;
     margin-bottom: 20px;
     color: gray;
+}
 
+.connexion-detail input{
+    border:none;
+    font-size: 1.5rem;
 }
 .nom h3{
     font-size: 3rem;
@@ -87,7 +90,8 @@ form{
     justify-content: center;
     align-items: center;
     justify-content: space-between;
-    padding-left: 200px;
+    position: relative;
+    padding: 0 80px 0 220px;
     
 
 }
@@ -99,13 +103,14 @@ form{
     
 }
 .image-profile{
-    position: relative;
-    left: 200px;
-    bottom: 110px;
+    position: absolute;
+    top:-90px;
+    left:0;
 }
 .global-profile{
-    margin-top: 100px;
+    margin: 100px auto;
     font-family: 'Roboto', sans-serif;
+    width:70vw;
 }
 
 

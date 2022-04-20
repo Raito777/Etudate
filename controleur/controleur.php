@@ -25,8 +25,8 @@
 		$data['title']="Accueil - Etudate";
 
         chargerPage("head.php",$data);
-        chargerPage("nav.html");
-		chargerPage("accueil.html");
+        chargerPage("nav.php");
+		chargerPage("accueil.php");
 		chargerPage("footer.html");
 		
     }
@@ -39,8 +39,8 @@
 		$data['title']="Connexion - Etudate";
 
         chargerPage("head.php",$data);
-        chargerPage("nav.html");
-        chargerPage("connexion.html");
+        chargerPage("nav.php");
+        chargerPage("connexion.php");
         chargerPage("footer.html");
 		
     }
@@ -53,9 +53,9 @@
 		
 		chargerPage("head.php",$data);
 
-        chargerPage("nav.html");
+        chargerPage("nav.php");
 
-        chargerPage("inscription.html");
+        chargerPage("inscription.php");
 
         chargerPage("footer.html");
 	}
@@ -66,7 +66,7 @@
 		
 		chargerPage("head.php",$data);
 
-        chargerPage("nav.html");
+        chargerPage("nav.php");
 
         chargerPage("quizz.php");
 
@@ -80,11 +80,17 @@
 		
 		chargerPage("head.php",$data);
 
-        chargerPage("nav.html");
+        chargerPage("nav.php");
 
-        chargerPage("profil.html");
+        chargerPage("profil.php");
 
         chargerPage("footer.html");
+
+	}
+
+	function pageDeconnexion(){
+
+		chargerPage("deconnexion.php");
 
 	}
 

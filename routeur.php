@@ -20,13 +20,16 @@
 		case 'connexion' :
 			pageConnexion();
 			break;
+		case 'deconnexion' :
+			pageDeconnexion();
+			break;
 		case 'accueil' :
 				pageAccueil();
 				break;	
 		case 'quizz' :
 				pageQuizz();
 				break;
-		case 'profile':
+		case 'profil':
 				pageProfil();
 				break;
 		 default : 

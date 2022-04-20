@@ -1,5 +1,8 @@
 <?php
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 //connexion à la bdd
 $bdd = getBdd();
 //requete pour récupérer toutes les questions
