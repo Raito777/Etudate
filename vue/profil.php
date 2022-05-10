@@ -1,6 +1,7 @@
 <?php 
 
 
+
 ?>
 
 <div class="global-profile">
@@ -13,7 +14,7 @@
         <h3><?= $_SESSION['PrenomUtilisateur'] ?></h3>
         <!-- <p> étudiant en médecine</p> -->
         </div>   
-        <a class="connexion" href="">Modifier mon profil</a>
+        <a class="connexion" href="modifier-profil">Modifier mon profil</a>
     </div>
 
     <div class="profile-content">   
