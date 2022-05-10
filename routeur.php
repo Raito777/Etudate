@@ -1,6 +1,7 @@
 <?php
 
 	require_once("modele/bdd/bdd.php");
+	require_once("modele/etudiants_modele.php");
 
 	
 	require_once('controleur/controleur.php');
