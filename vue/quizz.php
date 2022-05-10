@@ -6,16 +6,17 @@ if (session_status() == PHP_SESSION_NONE) {
 //connexion à la bdd
 $bdd = getBdd();
 //requete pour récupérer toutes les questions
-$questions = $bdd->query('SELECT * FROM questions');
+$questions = getQuestions();
 
 if(isset($_POST['quizz'])){
 
     $arrResponses;
     
     for($index = 0; $index < 16; $index++) {
+        //ajoute l'id de la reponse au tableau
         $arrResponses[$index] = htmlspecialchars($_POST['question'.($index+1)]);
-        $reqRep = $bdd->prepare('INSERT INTO repond (idReponse_Reponses,id_Utilisateurs) VALUES(?,?)');
-        $reqRep->execute(array($arrResponses[$index],$_SESSION['IdUtilisateur']));
+        //insert les reponses dans la bdd
+        $reqRep = insertResponses($arrResponses,$index,$_SESSION['IdUtilisateur']);
     }
 
 }
