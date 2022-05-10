@@ -93,5 +93,16 @@
 		chargerPage("deconnexion.php");
 
 	}
+	function pageModifierProfil(){
+		$data['title']="ModifierProfil- Etudate";
+
+		chargerPage("head.php",$data);
+
+		chargerPage("nav.php");
+
+        chargerPage("modifier-profil.php");
+
+        chargerPage("footer.html");
+	}
 
 ?>

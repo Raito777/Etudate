@@ -34,6 +34,9 @@
 		case 'profil':
 				pageProfil();
 				break;
+		case 'modifier-profil' :
+				pageModifierProfil();
+				break;
 		 default : 
 		 	http_response_code('500');
 			echo '404';
