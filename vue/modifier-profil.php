@@ -27,21 +27,34 @@ $erreur = "";
                         
         }
         if(!empty($_POST['mail'])){
-            $insertemail = $bdd->prepare("UPDATE utilisateurs SET email_Utilisateurs = ? WHERE id_Utilisateurs=?");
-            $insertemail->execute(array($mail, $_SESSION['IdUtilisateur']));
-            $_SESSION['MailUtilisateur'] = $mail;
+            if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
+                $reqmail = $bdd->prepare('SELECT * FROM utilisateurs WHERE email_Utilisateurs = ?');
+                $reqmail->execute(array($mail));
+                $mailexist = $reqmail->rowCount();
+                    if($mailexist == 0) {
 
-        } 
-
-    
+                $insertemail = $bdd->prepare("UPDATE utilisateurs SET email_Utilisateurs = ? WHERE id_Utilisateurs=?");
+                $insertemail->execute(array($mail, $_SESSION['IdUtilisateur']));
+                $_SESSION['MailUtilisateur']=$mail;
+                
+                }
+                else{
+                    if($mail!=$_SESSION['MailUtilisateur']){
+                        $erreur="Adresse mail déjà utilisée !";
+                    }
+                    
+                }
+            }
+            else{
+                $erreur = "Votre adresse mail n'est pas valide !";
+            }
+             
+        }
     }
     
         
    
 
-?>
-        
-        
 ?>
 <form action="" method="POST">
 <div class="global-profile">
@@ -65,6 +78,7 @@ $erreur = "";
                 <input type="text" name="mail" value="<?= $_SESSION['MailUtilisateur'] ?>" />
                 <h3>Mot de passe</h3>
                 <input type="password" name="mdp" placeholder="Mot de passe" value="" />
+                <p id="message-erreur"><?= $erreur ?></p>
 
         </div>
     </form>
