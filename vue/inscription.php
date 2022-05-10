@@ -32,9 +32,10 @@
                                     if($orientation == "hommes" OR $orientation == "femmes" OR $orientation == "autres"){
 
 
+                                    // $insertmbr = $bdd->prepare('INSERT INTO utilisateurs (prenom_Utilisateurs, mdp_Utilisateurs, sexe_Utilisateurs, 	attirance_Utilisateurs, email_Utilisateurs, dateInscription_Utilisateurs, photo_Utilisateurs) VALUES(?, ?, ?, ?, ?, now(), "pp_0.svg")');
+                                    // $insertmbr->execute(array($prenom, $mdp, $genre, $orientation, $mail));
+                                    $inscription = inscription($prenom, $mdp, $genre, $orientation, $mail);
 
-                                    $insertmbr = $bdd->prepare('INSERT INTO utilisateurs (prenom_Utilisateurs, mdp_Utilisateurs, sexe_Utilisateurs, 	attirance_Utilisateurs, email_Utilisateurs, dateInscription_Utilisateurs, photo_Utilisateurs) VALUES(?, ?, ?, ?, ?, now(), "pp_0.svg")');
-                                    $insertmbr->execute(array($prenom, $mdp, $genre, $orientation, $mail));
                                     $erreur = _("Votre compte a bien été créé !");
                                     $_SESSION['IdUtilisateur'] = 0;
                                     header("Location: connexion");
