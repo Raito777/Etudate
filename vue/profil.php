@@ -8,7 +8,7 @@
 
     <div class="top-profile">
         <div class="image-profile">
-        <img src="../vue/img/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
+        <img src="../vue/img/avatar/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
         </div> 
         <div class="nom">
         <h3><?= $_SESSION['PrenomUtilisateur'] ?></h3>

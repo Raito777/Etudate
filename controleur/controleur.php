@@ -100,7 +100,7 @@
 
 		chargerPage("nav.php");
 
-        chargerPage("modifier-profil.php");
+        chargerPage("formulaire_profil.php");
 
         chargerPage("footer.html");
 	}
