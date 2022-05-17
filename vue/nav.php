@@ -19,7 +19,7 @@
             <a href="profil"><?= $_SESSION['PrenomUtilisateur'] ?></a>
             <a href="profil">
                 <div class="image-profil-nav">
-                    <img src="../vue/img/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
+                    <img src="../vue/img/avatar/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
                 </div>
             </a>
             <a href="deconnexion">
