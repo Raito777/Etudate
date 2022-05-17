@@ -108,4 +108,8 @@ $erreur = "";
 
     }
     $_SESSION["erreur"]=$erreur;
+    if($erreur){
+        header('Location: ../routeur.php/modifier-profil');  
+
+    }
 ?>
