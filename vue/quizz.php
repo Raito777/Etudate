@@ -6,7 +6,21 @@ if (session_status() == PHP_SESSION_NONE) {
 //connexion à la bdd
 $bdd = getBdd();
 //requete pour récupérer toutes les questions
-$questions = $bdd->query('SELECT * FROM questions');
+$questions = getQuestions();
+
+if(isset($_POST['quizz'])){
+
+    $arrResponses;
+    
+    for($index = 0; $index < 16; $index++) {
+        //ajoute l'id de la reponse au tableau
+        $arrResponses[$index] = htmlspecialchars($_POST['question'.($index+1)]);
+        //insert les reponses dans la bdd
+        $reqRep = insertResponses($arrResponses,$index,$_SESSION['IdUtilisateur']);
+    }
+
+}
+
 
 ?>
 
@@ -16,8 +30,10 @@ $questions = $bdd->query('SELECT * FROM questions');
         //on parcours toute les questions 1 par 1
         while($question = $questions->fetch()) {
             //on cherche les reponses qui correspondent à l'id de la question où on est
-            $reponses = $bdd->prepare('SELECT * FROM reponses WHERE id_Question = ?');
-            $reponses->execute([$question['id_Question']]);
+
+            // $reponses = $bdd->prepare('SELECT * FROM reponses WHERE id_Question = ?');
+            // $reponses->execute([$question['id_Question']]);
+            $reponses = getResponses($question);
 
     ?>
 
@@ -33,7 +49,7 @@ $questions = $bdd->query('SELECT * FROM questions');
             ?>
 
                 <div>
-                    <input type="radio" id="<?= "reponse".$reponse['idReponse_Reponses'] ?>" name="<?= "question".$question['id_Question'] ?>" value="<?= "reponse".$reponse['idReponse_Reponses'] ?>" required>
+                    <input type="radio" id="<?= "reponse".$reponse['idReponse_Reponses'] ?>" name="<?= "question".$question['id_Question'] ?>" value="<?= $reponse['idReponse_Reponses'] ?>" required>
                     <label for="<?= "reponse".$reponse['idReponse_Reponses'] ?>"><?= $reponse['reponse_Reponses'] ?></label>
                 </div>
 
@@ -47,6 +63,6 @@ $questions = $bdd->query('SELECT * FROM questions');
     <?php 
         }
     ?>
-    <input class="submit" type="submit" value="Valider">
+    <input class="submit" type="submit" name="quizz" value="Valider">
     </form>
 </div>
