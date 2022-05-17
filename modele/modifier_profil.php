@@ -21,8 +21,7 @@ $erreur = "";
                         'avatar' => $_SESSION['IdUtilisateur'].".".$extensionUpload,
                         'id' => $_SESSION['IdUtilisateur']
                         ));
-                     $_SESSION['PhotoUtilisateurs']=$_SESSION['IdUtilisateur'].".".$extensionUpload;
-                     header('Location: ../routeur.php/profil');                       
+                     $_SESSION['PhotoUtilisateurs']=$_SESSION['IdUtilisateur'].".".$extensionUpload;                       
                   } else {
                      $erreur = "Erreur durant l'importation de votre photo de profil";
                   }
@@ -38,7 +37,7 @@ $erreur = "";
             if($mdplength >= 6){
                 $insertmdp = $bdd->prepare("UPDATE utilisateurs SET mdp_Utilisateurs = ?  WHERE id_Utilisateurs=?");
                 $insertmdp->execute(array($mdp,$_SESSION['IdUtilisateur']));
-                header('Location: ../routeur.php/profil');
+                
                     
             }
             else{
@@ -54,7 +53,7 @@ $erreur = "";
                 $insertemail = $bdd->prepare("UPDATE utilisateurs SET email_Utilisateurs = ? WHERE id_Utilisateurs=?");
                 $insertemail->execute(array($mail, $_SESSION['IdUtilisateur']));
                 $_SESSION['MailUtilisateur']=$mail;   
-                header('Location: ../routeur.php/profil');            
+                            
                 }
                 else{
                     if($mail!=$_SESSION['MailUtilisateur']){
@@ -65,7 +64,10 @@ $erreur = "";
             else{
                 $erreur = "Votre adresse mail n'est pas valide !";
             }   
-        }      
+        } 
+        if(!empty($_POST['mail']) || !empty($_POST['mdp']) || !empty($_FILES['avatar']['name']) ){
+            header('Location: ../routeur.php/profil');
+        }    
     }
     function resize_crop_image($max_width, $max_height, $source_file, $dst_dir, $quality = 80){
         $imgsize = getimagesize($source_file);
