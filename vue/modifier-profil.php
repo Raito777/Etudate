@@ -1,9 +1,5 @@
 <?php
 
-
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 //connexion à la bdd
 $bdd = getBdd();
 
@@ -13,7 +9,7 @@ $erreur = "";
 
         $mail = trim(htmlspecialchars($_POST['mail']));
         $mdp = sha1($_POST['mdp']);
-        
+
 
         if(!empty($_POST['mdp'])){
             $mdplength = strlen($_POST['mdp']);
@@ -23,41 +19,41 @@ $erreur = "";
             }
             else{
                 $erreur = "Mot de passe trop court ! (6 caractères minimum)";
-            }  
-                        
+            }
+
         }
         if(!empty($_POST['mail'])){
             $insertemail = $bdd->prepare("UPDATE utilisateurs SET email_Utilisateurs = ? WHERE id_Utilisateurs=?");
             $insertemail->execute(array($mail, $_SESSION['IdUtilisateur']));
             $_SESSION['MailUtilisateur'] = $mail;
 
-        } 
+        }
 
-    
+
     }
-    
-        
-   
+
+
+
 
 ?>
-        
-        
+
+
 ?>
 <form action="" method="POST">
 <div class="global-profile">
 <div class="top-profile">
     <div class="image-profile">
-    <img src="../vue/img/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
-    </div> 
+    <img src="../vue/img/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">
+    </div>
     <div class="nom">
     <h3><?= $_SESSION['PrenomUtilisateur'] ?></h3>
     <!-- <p> étudiant en médecine</p> -->
-    </div>   
+    </div>
     <input type="submit" value="Enregistrer les modifications" name="submitmodif" class="connexion">
 </div>
 
 
-<div class="profile-content">   
+<div class="profile-content">
     <form   action="" method="Post" >
         <div class="connexion-detail">
 
