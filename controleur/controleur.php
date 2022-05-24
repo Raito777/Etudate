@@ -120,10 +120,9 @@
 	}
 
 	function getUserFromOrientation(){
-		$orientation = getAttirance($_SESSION["IdUtilisateur"]);
-		//var_dump($orientation[0]);
-		$personnes = findOrientation(substr_replace($orientation[0] ,"",-1));
-		//var_dump($personnes);
+		$orientation = getOrientationOfUser($_SESSION["IdUtilisateur"]);
+		$userSexe = getSexeOfUser($_SESSION["IdUtilisateur"]);
+		$personnes = findCorresponding(substr_replace($orientation[0] ,"",-1), $userSexe[0]."s");
 		return $personnes;
 	}
 
@@ -132,15 +131,16 @@
 		$match=0;
 		//$personnes=$personnes->fetch();
 		//var_dump($personnes);
-		while($personne=$personnes->fetch() && $match==0){
-			$match = findMatch($_SESSION["IdUtilisateur"],$personne["id_Utilisateurs"]);
-			var_dump($match);
-			//var_dump($personne);
 
+
+		while($personne=$personnes->fetch()){
+			if(!isAlreadyMatch($_SESSION["IdUtilisateur"],$personne["id_Utilisateurs"])){
+				return $personne;
+			}
 		}
-		return $match;
-		
 
+
+		return -1;
 		
 
 	}

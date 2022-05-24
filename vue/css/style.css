@@ -237,6 +237,7 @@ main{
 .image-profil-nav img{
     width:60px;
     height:60px;
+    border-radius: 50%;
 }
 
 .close-cross {
