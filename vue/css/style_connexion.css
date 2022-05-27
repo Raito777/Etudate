@@ -43,6 +43,12 @@
     transition: 0.2s;
 }
 
+.connexion-detail .modifier{
+    border:2px solid rgba(255,0,151,1);
+    border-radius:50px;
+    padding:5px 15px;
+}
+
 input:focus{
     outline:none;
     border: 2px solid rgba(255,0,151,1);
@@ -55,6 +61,7 @@ input + svg{
 input:focus + svg{
     fill : rgba(255,0,151,1)!important;
 }
+
 
 form{
     display: flex;

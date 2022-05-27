@@ -13,7 +13,7 @@
             <?php
               } else if($_SESSION['IdUtilisateur'] != 0) {
             ?>
-                <a href="accueil">Je match ♥</a>
+                <a href="match">Je match ♥</a>
             <?php
                 }
             ?>

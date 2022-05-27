@@ -4,7 +4,14 @@
     <div class="left-side">
         <div class="logoContent"><a href="accueil"><img src="../vue/img/logo.png" alt="logo d'Etudate">Etudate</a></div>
         <a href="accueil">Accueil</a>
-        <a href="">A propos de nous</a>
+        <a href="accueil">A propos de nous</a>
+        <?php
+            if(isset($_SESSION['IdUtilisateur']) AND $_SESSION['IdUtilisateur'] != 0) {
+        ?>
+            <a href="match">Mes matchs</a>
+        <?php
+            }
+        ?>
     </div>
     <div class="right-side">
         <?php
@@ -39,6 +46,13 @@
     <a href="accueil">Accueil</a>
     <a href="">A propos de nous</a>
     <?php
+            if(isset($_SESSION['IdUtilisateur']) AND $_SESSION['IdUtilisateur'] != 0) {
+        ?>
+            <a href="match">Mes matchs</a>
+        <?php
+            }
+        ?>
+    <?php
             if(empty(isset($_SESSION['IdUtilisateur'])) OR $_SESSION['IdUtilisateur'] == 0) {
     ?>
         <a href="">Créer un compte</a>
@@ -50,7 +64,7 @@
         <a href="profil"><?= $_SESSION['PrenomUtilisateur'] ?></a>
         <a href="profil">
             <div class="image-profil-nav">
-                <img src="../vue/img/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
+                <img src="../vue/img/avatar/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
             </div>
         </a>
         <a href="deconnexion">
