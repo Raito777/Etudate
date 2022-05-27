@@ -3,6 +3,7 @@
 	require_once("modele/bdd/bdd.php");
 	require_once("modele/etudiants_modele.php");
 	require_once("modele/quizz_modele.php");
+	require_once("modele/match_modele.php");
 
 	
 	require_once('controleur/controleur.php');
@@ -36,6 +37,9 @@
 				break;
 		case 'modifier-profil' :
 				pageModifierProfil();
+				break;
+		case 'match' :
+				pageMatch();
 				break;
 		 default : 
 		 	http_response_code('500');

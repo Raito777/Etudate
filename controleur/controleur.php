@@ -105,4 +105,56 @@
         chargerPage("footer.html");
 	}
 
+	function pageMatch(){
+
+		$data['title']="Match- Etudate";
+
+		chargerPage("head.php",$data);
+
+		chargerPage("nav.php");
+
+        chargerPage("match.php");
+
+        chargerPage("footer.html");
+
+	}
+
+	function getUserFromOrientation(){
+		$orientation = getOrientationOfUser($_SESSION["IdUtilisateur"]);
+		$userSexe = getSexeOfUser($_SESSION["IdUtilisateur"]);
+		$personnes = findCorresponding(substr_replace($orientation[0] ,"",-1), $userSexe[0]."s");
+		return $personnes;
+	}
+
+	function generateMatch(){
+		$personnes=getUserFromOrientation();
+		$match=0;
+		//$personnes=$personnes->fetch();
+		//var_dump($personnes);
+		while($personne=$personnes->fetch()){
+			if(!isAlreadyMatch($_SESSION["IdUtilisateur"],$personne["id_Utilisateurs"])){
+				return $personne;
+			}
+		}
+		return -1;
+	}
+
+	function insertMatchNo($idUser1, $idUser2){
+		$bdd = getBdd();
+		$insertmatch = $bdd->prepare('INSERT INTO compatible (id_Utilisateurs_1, id_Utilisateurs_2) VALUES( ?, ?)');
+		$insertmatch->execute(array($idUser1, $idUser2));
+		echo "<meta http-equiv='refresh' content='0'>";
+		return $insertmatch;
+	}
+
+	function insertMatchYes($idUser1, $idUser2){
+		$bdd = getBdd();
+		$insertmatch = $bdd->prepare('INSERT INTO compatible (id_Utilisateurs_1, 	id_Utilisateurs_2, date_Matchs) VALUES(?, ?, now())');
+		$insertmatch->execute(array($idUser1, $idUser2));
+		echo "<meta http-equiv='refresh' content='0'>";
+		return $insertmatch;
+	}
+
+
+
 ?>
