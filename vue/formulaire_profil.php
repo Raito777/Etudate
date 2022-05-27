@@ -1,8 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
 <form action="../modele/modifier_profil.php" method="POST" enctype="multipart/form-data">
 
 <div class="global-profile">

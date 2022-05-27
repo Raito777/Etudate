@@ -1,5 +1,11 @@
 <?php
+function sessionConnexion(){
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+}
 
+sessionConnexion();
 
 function getUserProfil($idUser){
     $bdd = getBdd();
@@ -15,6 +21,25 @@ function inscription($prenom, $mdp, $genre, $orientation, $mail){
     return $insertmbr;
 }
 
+function getUserProfilPicture(){
+    return $_SESSION['PhotoUtilisateurs'];
+}
 
+function getUserProfilName(){
+    return $_SESSION['PrenomUtilisateur'];
+}
+
+function getUserProfilMail(){
+    return $_SESSION['MailUtilisateur'];
+}
+
+function getUserProfilId(){
+    if(isset($_SESSION['IdUtilisateur'])){
+        return $_SESSION['IdUtilisateur'] ;
+    }
+    else{
+        return -1;
+    }
+}
 
 ?>
