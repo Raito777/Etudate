@@ -50,25 +50,6 @@ function isAlreadyMatch($idUser1,$idUser2){
     return false;
 }
 
-function insertMatchNo($idUser1, $idUser2){
-    $bdd = getBdd();
-    $insertmatch = $bdd->prepare('INSERT INTO compatible (id_Utilisateurs_1, id_Utilisateurs_2) VALUES( ?, ?)');
-    $insertmatch->execute(array($idUser1, $idUser2));
-    echo "<meta http-equiv='refresh' content='0'>";
-
-
-    return $insertmatch;
-}
-function insertMatchYes($idUser1, $idUser2){
-    $bdd = getBdd();
-    $insertmatch = $bdd->prepare('INSERT INTO compatible (id_Utilisateurs_1, 	id_Utilisateurs_2, date_Matchs) VALUES(?, ?, now())');
-    $insertmatch->execute(array($idUser1, $idUser2));
-    echo "<meta http-equiv='refresh' content='0'>";
-
-
-    return $insertmatch;
-}
-
 function findExistingMatchs($idUser1){
 
     $bdd = getBdd();

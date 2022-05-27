@@ -56,10 +56,12 @@ form .match-profile .submit:first-child{
 
 .match-list{
     width:350px;
+    max-height: 580px;
     background:white;
     padding:20px;
     border-radius: 15px;
     margin:20px;
+    overflow-y: scroll;
 }
 
 .image-profile-list img{
