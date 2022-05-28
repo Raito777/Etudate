@@ -1,4 +1,3 @@
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -15,4 +14,3 @@
     <link rel="stylesheet" href="../vue/css/style_profile.css">
 
 </head>
-

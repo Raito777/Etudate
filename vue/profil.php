@@ -2,7 +2,7 @@
 
     <div class="top-profile">
         <div class="image-profile">
-        <img src="../vue/img/<?= getUserPhoto();?>" alt="photo de profil">  
+        <img src="vue/img/avatar/<?= $_SESSION['IdUtilisateur']?>" alt="photo de profil">  
         </div> 
         <div class="nom">
         <h3><?= getUserName();?></h3>
