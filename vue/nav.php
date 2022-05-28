@@ -3,7 +3,14 @@
     <div class="left-side">
         <div class="logoContent"><a href="accueil"><img src="../vue/img/logo.png" alt="logo d'Etudate">Etudate</a></div>
         <a href="accueil">Accueil</a>
-        <a href="">A propos de nous</a>
+        <a href="accueil">A propos de nous</a>
+        <?php
+            if(checkUserSet()) {
+        ?>
+            <a href="match">Mes matchs</a>
+        <?php
+            }
+        ?>
     </div>
     <div class="right-side">
         <?php
@@ -38,6 +45,13 @@
     <a href="">A propos de nous</a>
     <?php
             if(!checkUserSet()) {
+        ?>
+            <a href="match">Mes matchs</a>
+        <?php
+            }
+        ?>
+    <?php
+            if(checkUserSet()) {
     ?>
         <a href="">Créer un compte</a>
         <a href="" class="connexion">Connexion</a>

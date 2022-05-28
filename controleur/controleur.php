@@ -43,8 +43,9 @@
 				 $_SESSION['PrenomUtilisateur'] = $userinfo['prenom_Utilisateurs'];
 				 $_SESSION['MailUtilisateur'] = $userinfo['email_Utilisateurs'];
 				 $_SESSION['PhotoUtilisateurs'] =  $userinfo['photo_Utilisateurs'];
-				 header('location: profil');
-				 echo "connecté ".$_SESSION['PrenomUtilisateur'];
+
+				header("Location:profil");
+				echo "connecté ".$_SESSION['PrenomUtilisateur'];
 			   } else{
 				 $erreur = "Mauvais mail ou mot de passe";
 			   }
@@ -60,11 +61,15 @@
 
 		//fonction commune, uniqueue, chargé de créer le contenu
 		//dynamique de la vue
+		
 		$data['title']="Connexion - Etudate";
 
-        chargerPage("head.php",$data);
+        chargerPage("head.php", $data);
+
         chargerPage("nav.php");
+		
         chargerPage("connexion.php");
+		
         chargerPage("footer.html");
 
     }
@@ -74,8 +79,7 @@
 		session_start();
 		$_SESSION = array();
 		session_destroy();
-		header("Location: accueil");
-
+		header("Location:accueil");
 	}
 	//Page modifier profil
 	function pageModifierProfil(){
@@ -91,85 +95,6 @@
         chargerPage("footer.html");
 	}
 
-
-	function checkModifProfil(){
-		$erreur = "";
-		$bdd = getBdd();
-		$erreur = "";
-		ob_start();
-			if(isset($_POST['submitmodif'])) {
-				$mail = trim(htmlspecialchars($_POST['mail']));
-				$mdp = sha1($_POST['mdp']);
-				if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name'])) {
-					$tailleMax = 2097152;
-					$extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-					if($_FILES['avatar']['size'] <= $tailleMax) {
-					   $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-					   if(in_array($extensionUpload, $extensionsValides)) {;
-						  $chemin = "vue/img/avatar/".$_SESSION['IdUtilisateur'].".".$extensionUpload;
-						  $photoresize = resize_crop_image(500, 500, $_FILES['avatar']['tmp_name'] , $_FILES['avatar']['tmp_name']);
-						  $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
-						  if($resultat) {
-							 $updateavatar = $bdd->prepare('UPDATE utilisateurs SET photo_Utilisateurs = :avatar WHERE id_Utilisateurs = :id');
-							 $updateavatar->execute(array(
-								'avatar' => $_SESSION['IdUtilisateur'].".".$extensionUpload,
-								'id' => $_SESSION['IdUtilisateur']
-								));
-							 $_SESSION['PhotoUtilisateurs']=$_SESSION['IdUtilisateur'].".".$extensionUpload;                       
-						  } else {
-							 $erreur = "Erreur durant l'importation de votre photo de profil";
-						  }
-					   } else {
-						  $erreur = "Votre photo de profil doit être au format jpg, jpeg, gif ou png";
-					   }
-					} else {
-					   $erreur = "Votre photo de profil ne doit pas dépasser 2Mo";
-					}
-				}
-				if(!empty($_POST['mdp'])){
-					$mdplength = strlen($_POST['mdp']);
-					if($mdplength >= 6){
-						$insertmdp = $bdd->prepare("UPDATE utilisateurs SET mdp_Utilisateurs = ?  WHERE id_Utilisateurs=?");
-						$insertmdp->execute(array($mdp,$_SESSION['IdUtilisateur']));
-						
-							
-					}
-					else{
-						$erreur = "Mot de passe trop court ! (6 caractères minimum)";
-					}                          
-				}
-				if(!empty($_POST['mail'])){
-					if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
-						$reqmail = $bdd->prepare('SELECT * FROM utilisateurs WHERE email_Utilisateurs = ?');
-						$reqmail->execute(array($mail));
-						$mailexist = $reqmail->rowCount();
-							if($mailexist == 0) {
-						$insertemail = $bdd->prepare("UPDATE utilisateurs SET email_Utilisateurs = ? WHERE id_Utilisateurs=?");
-						$insertemail->execute(array($mail, $_SESSION['IdUtilisateur']));
-						$_SESSION['MailUtilisateur']=$mail;  
-						 
-									
-						}
-						else{
-							if($mail!=$_SESSION['MailUtilisateur']){
-								$erreur="Adresse mail déjà utilisée !";
-							}       
-						}
-					ob_flush();					}
-					else{
-						$erreur = "Votre adresse mail n'est pas valide !";
-					}   
-				} 
-				if(!empty($_POST['mail']) || !empty($_POST['mdp']) || !empty($_FILES['avatar']['name']) ){
-					header("Location: profil");
-				}    
-			}
-	
-		// if(isset($erreur)){
-		// 	header("Location: modifier-profil");  
-		// }
-		return $erreur;
-	}
 
 	//Page inscription
 
@@ -218,8 +143,10 @@
 	
 										$erreur = _("Votre compte a bien été créé !");
 										$_SESSION['IdUtilisateur'] = 0;
-										header("Location: connexion");
-	
+										
+										//echo "<script>window.location.href='connexion';</script>";
+										
+										header("Location:connexion");
 										}else{
 											$erreur = "L'attirance doit être Les hommes, Les femmes ou Autre";
 										}
@@ -266,14 +193,12 @@
 
 	}
 
-	
-
-
-
-
 
 	// Quizz Page
 
+	function formCompleted(){
+		return hasAlreadyRespond(getUserId());
+	}
 
 	function recupereQuestions(){
 		return $questions = getQuestions();
@@ -294,6 +219,7 @@
 				//insert les reponses dans la bdd
 				$reqRep = insertResponses($arrResponses,$index,getUserId());
 			}
+			header("Location:match");
 		
 		}
 	}
@@ -312,6 +238,43 @@
 
 	}
 
+	function pageMatch(){
+
+		$data['title']="Match- Etudate";
+
+		chargerPage("head.php",$data);
+
+		chargerPage("nav.php");
+
+        chargerPage("match.php");
+
+        chargerPage("footer.html");
+
+	}
+
+	function getUserFromOrientation(){
+		$orientation = getOrientationOfUser($_SESSION["IdUtilisateur"]);
+		$userSexe = getSexeOfUser($_SESSION["IdUtilisateur"]);
+		$personnes = findCorresponding(substr_replace($orientation[0] ,"",-1), $userSexe[0]."s");
+		return $personnes;
+	}
+
+	function generateMatch(){
+		$personnes=getUserFromOrientation();
+		$match=0;
+		//$personnes=$personnes->fetch();
+		//var_dump($personnes);
+		while($personne=$personnes->fetch()){
+			if(!isAlreadyMatch($_SESSION["IdUtilisateur"],$personne["id_Utilisateurs"])){
+				return $personne;
+			}
+		}
+		return -1;
+	}
+
+
+
+
 
 	// USER INFORMATIONS	
 
@@ -322,7 +285,12 @@
 	}
 
 	function getUserPhoto(){
-		return $_SESSION['PhotoUtilisateurs'];
+		if(isset($_SESSION['PhotoUtilisateurs'])){
+			return $_SESSION['PhotoUtilisateurs'];
+		}
+		else{
+			return -1;
+		}
 	}
 
 	function setUserPhoto($photo){
@@ -330,7 +298,13 @@
 	}
 
 	function getUserName(){
-		return $_SESSION['PrenomUtilisateur'];
+		if(isset($_SESSION['PrenomUtilisateur'])){
+			return $_SESSION['PrenomUtilisateur'];
+		}
+		else{
+			return -1;
+		}
+		
 	}
 
 	function getUserEmail(){
@@ -361,7 +335,7 @@
 
 
 
-	sessionConnexion();
+	
 
 
 ?>

@@ -19,5 +19,21 @@ function insertResponses($arrResponses,$index,$idUser){
     $reqRep->execute(array($arrResponses[$index],$idUser));
 }
 
+function hasAlreadyRespond($idUser){
+    $bdd = getBdd();
+    $reqRep = $bdd->prepare("SELECT * FROM repond WHERE id_Utilisateurs = ?");
+    $reqRep->execute(array($idUser));
+
+    $reqRepExist = $reqRep->rowCount();
+
+    if($reqRepExist>0){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
 
 ?>

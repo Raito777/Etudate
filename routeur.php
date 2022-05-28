@@ -3,6 +3,7 @@
 	require_once("modele/bdd/bdd.php");
 	require_once("modele/etudiants_modele.php");
 	require_once("modele/quizz_modele.php");
+	require_once("modele/match_modele.php");
 
 	
 	require_once('controleur/controleur.php');
@@ -11,14 +12,15 @@
 
 	$method = $_SERVER['REQUEST_METHOD'];
 
-	
+	sessionConnexion();
+
 	//This part is the routing process : depending the different url elements, we dispatch 
 	switch($page[3]) {
 		case 'inscription' : 
 			pageInscription();
 			break;
 		case 'connexion' :
-			pageConnexion();
+				pageConnexion();
 			break;
 		case 'deconnexion' :
 		if(getUserId() != -1 && getUserId() != 0){
@@ -33,7 +35,9 @@
 				break;	
 		case 'quizz' :
 			if(getUserId() != -1 && getUserId() != 0){
-				pageQuizz();
+				if(!formCompleted()){
+					pageQuizz();
+				}
 			}
 			else{
 				pageConnexion();
@@ -54,6 +58,9 @@
 			else{
 				pageConnexion();
 			}
+				break;
+		case 'match' :
+				pageMatch();
 				break;
 		 default : 
 		 	http_response_code('500');

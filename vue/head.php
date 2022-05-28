@@ -12,5 +12,6 @@
     <link rel="stylesheet" href="../vue/css/style_connexion.css">
     <link rel="stylesheet" href="../vue/css/style_quizz.css">
     <link rel="stylesheet" href="../vue/css/style_profile.css">
+    <link rel="stylesheet" href="../vue/css/style_match.css">
 
 </head>

@@ -9,6 +9,7 @@ body{
     position:relative;
     background-color: #EBEBEB;
     overflow-x: hidden;
+    height:100vh;
 }
 
 .display-none{
@@ -237,6 +238,7 @@ main{
 .image-profil-nav img{
     width:60px;
     height:60px;
+    border-radius: 50%;
 }
 
 .close-cross {

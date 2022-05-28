@@ -12,7 +12,7 @@
             <?php
               } else {
             ?>
-                <a href="accueil">Je match ♥</a>
+                <a href="match">Je match ♥</a>
             <?php
                 }
             ?>
