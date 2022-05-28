@@ -50,8 +50,14 @@
 		case 'modifier-profil' :
 			if(getUserId() != -1 && getUserId() != 0){
 				pageModifierProfil();
-			}
-			else{
+      }else{
+        pageConnexion();
+      }
+				break;
+		case 'match' :
+			if(getUserId() != -1 && getUserId() != 0){
+				pageMatch();
+			}else{
 				pageConnexion();
 			}
 				break;
