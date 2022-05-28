@@ -60,7 +60,11 @@
 			}
 				break;
 		case 'match' :
+			if(getUserProfilId() != -1 && getUserProfilId() != 0){
 				pageMatch();
+			}else{
+				pageConnexion();
+			}
 				break;
 		 default : 
 		 	http_response_code('500');
