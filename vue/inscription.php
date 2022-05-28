@@ -1,72 +1,7 @@
-<?php
-
-    $bdd = getBdd();
-
-    $erreur = "";
-
-    if(isset($_POST['forminscription'])) {
-
-        $prenom = trim(htmlspecialchars($_POST['prenom']));
-        $mail = trim(htmlspecialchars($_POST['adressemail']));
-        $genre = htmlspecialchars($_POST['genre']);
-        $orientation = htmlspecialchars($_POST['orientation']);
-        $mdp = sha1($_POST['mdp']);
-        $confirmationMDP = sha1($_POST['confirmationMDP']);
-
-        if(!empty($_POST['prenom']) AND !empty($_POST['adressemail']) AND !empty($_POST['genre']) AND !empty($_POST['orientation']) AND !empty($_POST['mdp']) AND !empty($_POST['confirmationMDP'])){
-            $prenomlength = strlen($prenom);
-            if($prenomlength <= 64 AND $prenomlength >= 2 AND !empty($_POST['prenom'])) {
-                if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
-                    $reqmail = $bdd->prepare('SELECT * FROM utilisateurs WHERE email_Utilisateurs = ?');
-                    $reqmail->execute(array($mail));
-                    $mailexist = $reqmail->rowCount();
-                    if($mailexist == 0) {
-                        $mdplength = strlen($_POST['mdp']);
-					    if($mdplength >= 6){
-                            if($mdp == $confirmationMDP) {
-                                if($genre == "homme" OR $genre == "femme" OR $genre == "autre"){
-                                    if($orientation == "hommes" OR $orientation == "femmes" OR $orientation == "autres"){
-
-
-                                    // $insertmbr = $bdd->prepare('INSERT INTO utilisateurs (prenom_Utilisateurs, mdp_Utilisateurs, sexe_Utilisateurs, 	attirance_Utilisateurs, email_Utilisateurs, dateInscription_Utilisateurs, photo_Utilisateurs) VALUES(?, ?, ?, ?, ?, now(), "pp_0.svg")');
-                                    // $insertmbr->execute(array($prenom, $mdp, $genre, $orientation, $mail));
-                                    $inscription = inscription($prenom, $mdp, $genre, $orientation, $mail);
-
-                                    $erreur = _("Votre compte a bien été créé !");
-                                    $_SESSION['IdUtilisateur'] = 0;
-                                    header("Location: connexion");
-
-                                    }else{
-                                        $erreur = "L'attirance doit être Les hommes, Les femmes ou Autre";
-                                    }
-                                }else{
-                                    $erreur = "Le genre doit être homme, femme ou autre";
-                                }
-                            }else{
-                                $erreur = "Vos mots de passe ne correspondent pas !";
-                            }
-                        }else{
-                            $erreur = "Mot de passe trop court ! (6 caractères minimum)";
-                        }
-                    }else{
-                        $erreur = "Adresse mail déjà utilisée !";
-                    }
-                }else{
-                    $erreur = "Votre adresse mail n'est pas valide !";
-                }
-            }else{
-                $erreur = "Votre prénom doit contenir au minimum 2 et au maximum 64 caractères";
-            }
-        }else{
-            $erreur = "Tous les champs doivent être complétés !";
-        }
-    }
-?>
-
 <div class="connexion-div"><div class="left-connect">
     <h3>Inscrivez-vous</h3>
     <p>et rejoignez d'autres étudiants</p>
- <form   action="" method="Post">
+ <form   action="<?php $erreur = checkInscription();?>" method="Post">
      
         <div class="input-div">
         

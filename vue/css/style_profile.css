@@ -1,6 +1,6 @@
 .connexion-detail{
     justify-content: flex-start;
-    padding: 60px 60px;
+    padding: 40px 60px;
     align-items: center;
     font-family: 'Roboto', sans-serif;
     background-color: white;
@@ -107,46 +107,7 @@ form{
     position: absolute;
     top:-90px;
     left:0;
-    width: 200px;
-    height: 200px;
 }
-
-.image-profile label{
-    width:100%;
-    height:100%;
-}
-
-.image-profile input[type="file"] {
-    display: none;
-}
-.modifier-pen{
-    width:100%;
-    height:100%;
-    position: absolute;
-    z-index: 1;
-    background:black;
-    border-radius: 50%;
-    opacity: 0;
-    transition:0.2s ease-in-out;
-}
-.modifier-pen:hover{
-    opacity: 0.7;
-}
-.profile-content .connexion{
-    margin:10px 0;
-}
-
-.image-profile .pen{
-    width:20px;
-    height:auto;
-    fill: white;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-}
-
-
 .global-profile{
     margin: 100px auto;
     font-family: 'Roboto', sans-serif;

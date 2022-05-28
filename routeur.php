@@ -3,7 +3,6 @@
 	require_once("modele/bdd/bdd.php");
 	require_once("modele/etudiants_modele.php");
 	require_once("modele/quizz_modele.php");
-	require_once("modele/match_modele.php");
 
 	
 	require_once('controleur/controleur.php');
@@ -13,8 +12,6 @@
 	$method = $_SERVER['REQUEST_METHOD'];
 
 	
-
-
 	//This part is the routing process : depending the different url elements, we dispatch 
 	switch($page[3]) {
 		case 'inscription' : 
@@ -24,8 +21,8 @@
 			pageConnexion();
 			break;
 		case 'deconnexion' :
-		if(getUserProfilId() != -1 && getUserProfilId() != 0){
-			pageDeconnexion();
+		if(getUserId() != -1 && getUserId() != 0){
+			deconnexionUser();
 		}
 		else{
 			pageConnexion();
@@ -35,7 +32,7 @@
 				pageAccueil();
 				break;	
 		case 'quizz' :
-			if(getUserProfilId() != -1 && getUserProfilId() != 0){
+			if(getUserId() != -1 && getUserId() != 0){
 				pageQuizz();
 			}
 			else{
@@ -43,7 +40,7 @@
 			}
 				break;
 		case 'profil':
-			if(getUserProfilId() != -1 && getUserProfilId() != 0){
+			if(getUserId() != -1 && getUserId() != 0){
 				pageProfil();
 			}
 			else{
@@ -51,10 +48,12 @@
 			}
 				break;
 		case 'modifier-profil' :
+			if(getUserId() != -1 && getUserId() != 0){
 				pageModifierProfil();
-				break;
-		case 'match' :
-				pageMatch();
+			}
+			else{
+				pageConnexion();
+			}
 				break;
 		 default : 
 		 	http_response_code('500');

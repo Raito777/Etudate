@@ -1,43 +1,11 @@
 <?php
-
-
-$bdd = getBdd();
-
-$erreur = "";
-
-if(isset($_POST['formconnexion'])) {
-
-	   $mailconnect = htmlspecialchars($_POST['mailconnect']);
-	   $mdpconnect = sha1($_POST['mdpconnect']);
-	   if(!empty($mailconnect) AND !empty($mdpconnect)) {
-	      $requsermail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email_Utilisateurs  = ? AND mdp_Utilisateurs  = ?");
-	      $requsermail->execute(array($mailconnect, $mdpconnect));
-          $usermailexist = $requsermail->rowCount();
-	      if($usermailexist == 1) {
-	        $userinfo = $requsermail->fetch();
-	        $_SESSION['IdUtilisateur'] = $userinfo['id_Utilisateurs'];
-	        $_SESSION['PrenomUtilisateur'] = $userinfo['prenom_Utilisateurs'];
-	        $_SESSION['MailUtilisateur'] = $userinfo['email_Utilisateurs'];
-            $_SESSION['PhotoUtilisateurs'] =  $userinfo['photo_Utilisateurs'];
-            header('location: profil');
-            echo "connecté ".$_SESSION['PrenomUtilisateur'];
-                        
-	      } else{
-            $erreur = "Mauvais mail ou mot de passe";
-          }
-	   } else {
-	      $erreur = "Tous les champs doivent être complétés !";
-	   }
-    }
-
+$erreur = checkConnexion();
 ?>
-
-
 
 <div class="connexion-div"><div class="left-connect">
     <?php   
-        if(!empty(isset($_SESSION['IdUtilisateur']))) {
-            if($_SESSION['IdUtilisateur']==0) {
+        if(getUserId() != -1) {
+            if(getUserId()==0) {
     ?>
        <p><?=  "Compte créé avec succès !" ?></p>
     <?php

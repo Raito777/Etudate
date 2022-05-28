@@ -1,32 +1,24 @@
 <body id="body">
-
 <nav>
     <div class="left-side">
         <div class="logoContent"><a href="accueil"><img src="../vue/img/logo.png" alt="logo d'Etudate">Etudate</a></div>
         <a href="accueil">Accueil</a>
-        <a href="accueil">A propos de nous</a>
-        <?php
-            if(isset($_SESSION['IdUtilisateur']) AND $_SESSION['IdUtilisateur'] != 0) {
-        ?>
-            <a href="match">Mes matchs</a>
-        <?php
-            }
-        ?>
+        <a href="">A propos de nous</a>
     </div>
     <div class="right-side">
         <?php
-            if(empty(isset($_SESSION['IdUtilisateur'])) OR $_SESSION['IdUtilisateur'] == 0) {
+            if(!checkUserSet()) {
         ?>
             <a href="inscription">Créer un compte</a>
             <a href="connexion" class="connexion">Connexion</a>
         <?php
-            } else if($_SESSION['IdUtilisateur'] != 0) {
+            } else if(getUserId() != 0) {
         ?>
             
-            <a href="profil"><?= $_SESSION['PrenomUtilisateur'] ?></a>
+            <a href="profil"><?= getUserName(); ?></a>
             <a href="profil">
                 <div class="image-profil-nav">
-                    <img src="../vue/img/avatar/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
+                    <img src="../vue/img/avatar/<?= getUserPhoto(); ?>" alt="photo de profil">  
                 </div>
             </a>
             <a href="deconnexion">
@@ -39,32 +31,24 @@
     </div>
 
 </nav>
-
 <div class="responsive-nav display-none" id="responsive-nav">
     <div class="close-cross" id="close-cross" onclick="closeNav()"></div>
     <div class="logoContent"><a href="accueil"><img src="../vue/img/logo.png" alt="logo d'Etudate">Etudate</a></div>
     <a href="accueil">Accueil</a>
     <a href="">A propos de nous</a>
     <?php
-            if(isset($_SESSION['IdUtilisateur']) AND $_SESSION['IdUtilisateur'] != 0) {
-        ?>
-            <a href="match">Mes matchs</a>
-        <?php
-            }
-        ?>
-    <?php
-            if(empty(isset($_SESSION['IdUtilisateur'])) OR $_SESSION['IdUtilisateur'] == 0) {
+            if(!checkUserSet()) {
     ?>
         <a href="">Créer un compte</a>
         <a href="" class="connexion">Connexion</a>
     <?php
-            } else if($_SESSION['IdUtilisateur'] != 0)  {
+            } else if(getUserId() != 0)  {
     ?>
 
-        <a href="profil"><?= $_SESSION['PrenomUtilisateur'] ?></a>
+        <a href="profil"><?= getUserName(); ?></a>
         <a href="profil">
             <div class="image-profil-nav">
-                <img src="../vue/img/avatar/<?= $_SESSION['PhotoUtilisateurs'] ?>" alt="photo de profil">  
+                <img src="../vue/img/<?= getUserPhoto(); ?>" alt="photo de profil">  
             </div>
         </a>
         <a href="deconnexion">

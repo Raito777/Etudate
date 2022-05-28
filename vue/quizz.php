@@ -1,8 +1,3 @@
-<?php
-require_once("controleur/controleur.php");
-?>
-
-
 <div class="quizz-div">
     <form action="<?php addReponsesToUser(); ?>" method="Post">
     <?php
