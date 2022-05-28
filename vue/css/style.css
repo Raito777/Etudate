@@ -9,6 +9,7 @@ body{
     position:relative;
     background-color: #EBEBEB;
     overflow-x: hidden;
+    height:100vh;
 }
 
 .display-none{

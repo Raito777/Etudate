@@ -1,4 +1,3 @@
-
     <header>
 
         <div class="left-header">
@@ -7,11 +6,11 @@
                 <p>Le site de rencontre pour étudiants</p>
             </div>
             <?php
-              if(empty(isset($_SESSION['IdUtilisateur'])) OR $_SESSION['IdUtilisateur'] == 0) {
+              if(!checkUserSet()) {
             ?>
               <a href="inscription">Je m'inscris !</a>
             <?php
-              } else if($_SESSION['IdUtilisateur'] != 0) {
+              } else {
             ?>
                 <a href="match">Je match ♥</a>
             <?php

@@ -12,8 +12,7 @@
 
 	$method = $_SERVER['REQUEST_METHOD'];
 
-	
-
+	sessionConnexion();
 
 	//This part is the routing process : depending the different url elements, we dispatch 
 	switch($page[3]) {
@@ -21,11 +20,11 @@
 			pageInscription();
 			break;
 		case 'connexion' :
-			pageConnexion();
+				pageConnexion();
 			break;
 		case 'deconnexion' :
-		if(getUserProfilId() != -1 && getUserProfilId() != 0){
-			pageDeconnexion();
+		if(getUserId() != -1 && getUserId() != 0){
+			deconnexionUser();
 		}
 		else{
 			pageConnexion();
@@ -35,15 +34,17 @@
 				pageAccueil();
 				break;	
 		case 'quizz' :
-			if(getUserProfilId() != -1 && getUserProfilId() != 0){
-				pageQuizz();
+			if(getUserId() != -1 && getUserId() != 0){
+				if(!formCompleted()){
+					pageQuizz();
+				}
 			}
 			else{
 				pageConnexion();
 			}
 				break;
 		case 'profil':
-			if(getUserProfilId() != -1 && getUserProfilId() != 0){
+			if(getUserId() != -1 && getUserId() != 0){
 				pageProfil();
 			}
 			else{
@@ -51,14 +52,15 @@
 			}
 				break;
 		case 'modifier-profil' :
+			if(getUserId() != -1 && getUserId() != 0){
 				pageModifierProfil();
-				break;
-		case 'match' :
-			if(getUserProfilId() != -1 && getUserProfilId() != 0){
-				pageMatch();
-			}else{
+			}
+			else{
 				pageConnexion();
 			}
+				break;
+		case 'match' :
+				pageMatch();
 				break;
 		 default : 
 		 	http_response_code('500');

@@ -2,7 +2,7 @@
 
     <div class="top-profile">
         <div class="image-profile">
-        <img src="../vue/img/avatar/<?= getUserPhoto();?>" alt="photo de profil">  
+        <img src="../vue/img/avatar/<?= getUserPhoto(); ?>" alt="photo de profil">  
         </div> 
         <div class="nom">
         <h3><?= getUserName();?></h3>
@@ -22,7 +22,17 @@
 
             </div>
         </form>
-    <a href="quizz" class="connexion">Faire le questionnaire !</a>
+
+
+    <?php 
+        if(!formCompleted()){
+    ?>
+        <a href="quizz" class="connexion">Faire le questionnaire !</a>
+    <?php 
+       }
+    ?>
+     
+    
     </div>
     
 </div>

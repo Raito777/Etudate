@@ -3,14 +3,12 @@ require_once("controleur/controleur.php");
 $matchs = getUserFromOrientation();
 $theMatch = generateMatch();
 
-$existingMatchs = findExistingMatchs($_SESSION["IdUtilisateur"]);
-
-//var_dump($existingMatchs);
+$existingMatchs = findExistingMatchs(getUserId());
 
 if(isset($_POST['machNo'])) {
-    $insertMatchNo = insertMatchNo($_SESSION["IdUtilisateur"], $theMatch["id_Utilisateurs"]);
+    $insertMatchNo = insertMatchNo(getUserId(), $theMatch["id_Utilisateurs"]);
 }else if(isset($_POST['matchYes'])) {
-    $insertMatchYes = insertMatchYes($_SESSION["IdUtilisateur"], $theMatch["id_Utilisateurs"]);
+    $insertMatchYes = insertMatchYes(getUserId(), $theMatch["id_Utilisateurs"]);
 }
 
 ?>
@@ -52,7 +50,7 @@ if(isset($_POST['machNo'])) {
 
                 while($existingMatch = $existingMatchs->fetch()) {
                     //si l'id est égale à l'utilisateurs, alors c'est pas bon, il faut prendre l'autre id du match
-                    if($existingMatch["id_Utilisateurs_1"] == $_SESSION["IdUtilisateur"]){
+                    if($existingMatch["id_Utilisateurs_1"] == getUserId()){
                         $userMatchId = $existingMatch["id_Utilisateurs_2"];
                     }else{
                         $userMatchId = $existingMatch["id_Utilisateurs_1"];
